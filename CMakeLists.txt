@@ -35,14 +35,14 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(Chip8 Chip8.c )
+add_executable(Chip8 src/main.c src/chip8.c src/keypad.c src/display_ctrl.c)
 
 pico_set_program_name(Chip8 "Chip8")
 pico_set_program_version(Chip8 "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(Chip8 0)
-pico_enable_stdio_usb(Chip8 0)
+pico_enable_stdio_usb(Chip8 1)
 
 # Add the standard library to the build
 target_link_libraries(Chip8
@@ -52,6 +52,7 @@ target_link_libraries(Chip8
 target_include_directories(Chip8 PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}
   ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
+  ${CMAKE_CURRENT_LIST_DIR}/include
 )
 
 # Add any user requested libraries
